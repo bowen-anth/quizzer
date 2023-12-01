@@ -1,6 +1,6 @@
 import React from "react"
 import './App.css'
-import Intro from "./src/components/Intro"
+import Intro from "../src/components/Intro"
 import {encode} from 'html-entities';
 
 encode('< > " \' & © ∆');
