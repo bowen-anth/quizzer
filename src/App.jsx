@@ -50,7 +50,7 @@ function App() {
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
         {!resultScreen && <Questions handleClickSubmit={toggleSubmit} />}
-        {resultScreen && <Result />}
+        {resultScreen && <Result handClickReset={toggleStart} />}
       </>
     )
 }
