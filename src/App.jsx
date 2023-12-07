@@ -20,9 +20,14 @@ encode('< > " \' & ©', {mode: 'nonAsciiPrintableOnly', level: 'xml'});
 function App() {
   const [questions, setQuestions] = React.useState([])
   const [startGame, setStartGame] = React.useState(false)
-  
+  const [resultScreen, setResultScreen] = React.useState(false)
+
   function toggleStart() {
     setStartGame((prevState) => !prevState);
+  }
+
+  function toggleSubmit() {
+    setResultScreen((prevState) => !prevState);
   }
 
   React.useEffect(() => {
@@ -43,9 +48,9 @@ function App() {
 
     return (
       <>
-        {!startGame && <Intro handleClick={toggleStart} />}
-        {startGame && <Questions />}
-        {startGame && <Result />}
+        {!startGame && <Intro handleClickStart={toggleStart} />}
+        {!resultScreen && <Questions handleClickSubmit={toggleSubmit} />}
+        {resultScreen && <Result />}
       </>
     )
 }
