@@ -1,6 +1,8 @@
 import React from "react"
 import './App.css'
 import Intro from "../src/components/Intro"
+import Questions from "../src/components/Questions"
+import Result from "../src/components/Result"
 import {encode} from 'html-entities';
 
 encode('< > " \' & © ∆');
@@ -17,6 +19,7 @@ encode('< > " \' & ©', {mode: 'nonAsciiPrintableOnly', level: 'xml'});
 
 function App() {
   const [questions, setQuestions] = React.useState([])
+  const [startGame, setStartGame] = React.useState(false)
   
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
@@ -33,6 +36,8 @@ function App() {
     return (
       <>
         <Intro />
+        {startGame ? <Questions /> : null}
+        {startGame ? <Result /> : null}
       </>
     )
 }
