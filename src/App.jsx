@@ -21,23 +21,31 @@ function App() {
   const [questions, setQuestions] = React.useState([])
   const [startGame, setStartGame] = React.useState(false)
   
+  function toggleStart() {
+    setStartGame((prevState) => !prevState);
+  }
+
   React.useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
-        .then(res => res.json())
-        .then(data => {
-            setQuestions(data.results)
-            console.log(data)
-        })
-        .catch(error => {
-            console.error("There was an error:", error)
-    })
-}, [])
+    console.log("Updated startGame state:", startGame);
+  }, [startGame]);
+
+//   React.useEffect(() => {
+//     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
+//         .then(res => res.json())
+//         .then(data => {
+//             setQuestions(data.results)
+//             console.log(data)
+//         })
+//         .catch(error => {
+//             console.error("There was an error:", error)
+//     })
+// }, [])
 
     return (
       <>
-        <Intro />
-        {startGame ? <Questions /> : null}
-        {startGame ? <Result /> : null}
+        {!startGame && <Intro handleClick={toggleStart} />}
+        {startGame && <Questions />}
+        {startGame && <Result />}
       </>
     )
 }
