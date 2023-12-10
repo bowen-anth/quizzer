@@ -1,18 +1,5 @@
 import React from "react"
-import {encode} from 'html-entities';
-
-encode('< > " \' & © ∆');
-// -> '&lt; &gt; &quot; &apos; &amp; © ∆'
-
-encode('< ©', {mode: 'nonAsciiPrintable'});
-// -> '&lt; &copy;'
-
-encode('< ©', {mode: 'nonAsciiPrintable', level: 'xml'});
-// -> '&lt; &#169;'
-
-encode('< > " \' & ©', {mode: 'nonAsciiPrintableOnly', level: 'xml'});
-// -> '< > " \' & &#169;'
-
+import { decode } from 'html-entities'
 
 export default function Result(props) {
     return (
@@ -23,7 +10,7 @@ export default function Result(props) {
             <h1 className="question-header">Questions</h1>
                 {props.questions.map((question, index) => (
                     <div key={index}>
-                        <p>{question.question}</p>
+                        <p>{decode(question.question)}</p>
                     </div>
                 ))}
             <button className="question-button" onClick={props.handleClickSubmit}>Submit</button>

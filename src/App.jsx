@@ -3,7 +3,7 @@ import './App.css'
 import Intro from "../src/components/Intro"
 import Questions from "../src/components/Questions"
 import Result from "../src/components/Result"
-
+import { decode } from 'html-entities'
 
 function App() {
   const [questions, setQuestions] = React.useState([])
@@ -23,24 +23,25 @@ function App() {
   }, [startGame]);
 
   React.useEffect(() => {
-  if (startGame) {
-    fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
-        .then(res => res.json())
-        .then(data => {
-            setQuestions(data.results)
-            console.log(data)
+    if (startGame) {
+      fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
+        .then((res) => res.json())
+        .then((data) => {
+          setQuestions(data.results);
+          console.log(data);
         })
-        .catch(error => {
-            console.error("There was an error:", error)
-    })
-  }
-}, [startGame])
+        .catch((error) => {
+          console.error("There was an error:", error);
+        });
+    }
+  }, [startGame]);
+
 
     return (
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
         {startGame && !resultScreen && <Questions questions={questions} handleClickSubmit={toggleSubmit} />}
-        {resultScreen && <Result handClickReset={toggleStart} />}
+        {startGame && resultScreen && <Result handClickReset={toggleStart} />}
       </>
     )
 }

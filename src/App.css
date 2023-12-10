@@ -20,7 +20,7 @@
     margin: 1rem;
 }
 
-.intro-button {
+.intro-button, .question-button {
     border-radius: 0.9375rem;
     background: #4D5B9E;
     color: #F5F7FB;
