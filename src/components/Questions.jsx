@@ -4,9 +4,10 @@ import { decode } from 'html-entities'
 
 export default function Result(props) {
     const question = []
-    const correctAnswers = props.quizData.map((question) => (
-        question.correct_answer
-        ))
+    let correctAnswers = []
+    // const correctAnswers = props.quizData.map((question) => (
+    //     question.correct_answer
+    //     ))
     const answerChoices = []
         
     //shuffle answerChoices array. ashleedawg from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -21,12 +22,15 @@ export default function Result(props) {
     props.quizData.forEach((question) => {
         const incorrectAnswers = question.incorrect_answers
         const correctAnswer = question.correct_answer
+        const decodedCorrectAnswers = decode([correctAnswer])
         const combinedAnswers = decode([...incorrectAnswers, correctAnswer])
+        correctAnswers.push(decodedCorrectAnswers)
+        // correctAnswers += decode([correctAnswer])
         console.log('combinedAnswers', combinedAnswers)
         const shuffledAnswers = shuffleArray(combinedAnswers)
         answerChoices.push(shuffledAnswers)
     })
-    
+    console.log('correct answers', correctAnswers)
     console.log(answerChoices)
     // props.quizData.map((question) => (
     //     answerChoices.push(decode(question.incorrect_answers))
