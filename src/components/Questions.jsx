@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { decode } from 'html-entities'
+import { decode, decodeEntity } from 'html-entities'
 
 export default function Result(props) {
     const answerChoices = []
@@ -13,9 +13,9 @@ export default function Result(props) {
     }
 
     props.quizData.forEach((question) => {
-        const incorrectAnswers = decode(question.incorrect_answers)
+        const incorrectAnswers = question.incorrect_answers
         const correctAnswer = question.correct_answer
-        const combinedAnswers = [...incorrectAnswers, correctAnswer]
+        const combinedAnswers = decode([...incorrectAnswers, correctAnswer])
         console.log(combinedAnswers)
         shuffleArray(combinedAnswers)
         answerChoices.push(combinedAnswers)
