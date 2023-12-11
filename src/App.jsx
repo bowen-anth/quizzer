@@ -6,7 +6,7 @@ import Result from "../src/components/Result"
 import { decode } from 'html-entities'
 
 function App() {
-  const [questions, setQuestions] = React.useState([])
+  const [quizData, setQuizData] = React.useState([])
   const [startGame, setStartGame] = React.useState(false)
   const [resultScreen, setResultScreen] = React.useState(false)
 
@@ -27,8 +27,9 @@ function App() {
       fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
         .then((res) => res.json())
         .then((data) => {
-          setQuestions(data.results);
-          console.log(data);
+          setQuizData(data.results);
+          console.log(data.results)
+ 
         })
         .catch((error) => {
           console.error("There was an error:", error);
@@ -40,7 +41,7 @@ function App() {
     return (
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
-        {startGame && !resultScreen && <Questions questions={questions} handleClickSubmit={toggleSubmit} />}
+        {startGame && !resultScreen && <Questions quizData={quizData} handleClickSubmit={toggleSubmit} />}
         {startGame && resultScreen && <Result handClickReset={toggleStart} />}
       </>
     )
