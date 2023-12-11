@@ -14,8 +14,8 @@ export default function Result(props) {
 
     props.quizData.forEach((question) => {
         const incorrectAnswers = question.incorrect_answers
-        const correctAnswer = question.correct_answer
-        const combinedAnswers = decode([...incorrectAnswers, correctAnswer])
+        const correctAnswer = [question.correct_answer]
+        const combinedAnswers = decode([...incorrectAnswers, ...correctAnswer])
         console.log(combinedAnswers)
         shuffleArray(combinedAnswers)
         answerChoices.push(combinedAnswers)
