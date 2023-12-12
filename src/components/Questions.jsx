@@ -3,14 +3,13 @@ import ReactDOM from "react-dom"
 import { decode } from 'html-entities'
 
 export default function Result(props) {
-    const question = []
+    let questions = []
     let correctAnswers = []
-    // const correctAnswers = props.quizData.map((question) => (
-    //     question.correct_answer
-    //     ))
     const answerChoices = []
+
+
         
-    //shuffle answerChoices array. ashleedawg from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    //shuffle answerChoices array code from ashleedawg: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -25,30 +24,16 @@ export default function Result(props) {
         const decodedCorrectAnswers = decode([correctAnswer])
         const combinedAnswers = decode([...incorrectAnswers, correctAnswer])
         correctAnswers.push(decodedCorrectAnswers)
-        // correctAnswers += decode([correctAnswer])
         console.log('combinedAnswers', combinedAnswers)
         const shuffledAnswers = shuffleArray(combinedAnswers)
         answerChoices.push(shuffledAnswers)
     })
     console.log('correct answers', correctAnswers)
     console.log(answerChoices)
-    // props.quizData.map((question) => (
-    //     answerChoices.push(decode(question.incorrect_answers))
-    // ))
 
-    // let rightAnswers = props.quizData.map((question) => (
-    //     answerChoices.push(decode(question.correct_answer))
-    // ))
-
-    // console.log(answerChoices);
-    // console.log(rightAnswers)
-
-    
-
-
-
-    // let shuffledAnswers = shuffleArray(answerChoices)
-    // console.log(shuffledAnswers)
+    questions = props.quizData.map((question) => decode(question.question))
+    // let decodedQuestions = decode(questions)
+    console.log('questions', questions)
 
     return (
         <div className="question-div">
