@@ -11,12 +11,22 @@ export default function Result(props) {
         
     //shuffle answerChoices array code from coolaj86: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+        let currentIndex = array.length,  randomIndex;
+      
+        // While there remain elements to shuffle.
+        while (currentIndex > 0) {
+      
+          // Pick a remaining element.
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
         }
-        return array
-    }
+      
+        return array;
+      }
 
     props.quizData.forEach((question) => {
         const incorrectAnswers = question.incorrect_answers
@@ -29,7 +39,7 @@ export default function Result(props) {
         answerChoices.push(shuffledAnswers)
     })
     console.log('correct answers', correctAnswers)
-    console.log(answerChoices)
+    console.log('answer choices', answerChoices)
 
     questions = props.quizData.map((question) => decode(question.question))
     console.log('questions', questions)
