@@ -12,6 +12,8 @@ function App() {
 
   function toggleStart() {
     setStartGame((prevState) => !prevState);
+    setResultScreen(false)
+    setQuizData([])
   }
 
   function toggleSubmit() {
@@ -42,7 +44,7 @@ function App() {
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
         {startGame && !resultScreen && <Questions quizData={quizData} handleClickSubmit={toggleSubmit} />}
-        {startGame && resultScreen && <Result handClickReset={toggleStart} />}
+        {/* {startGame && resultScreen && <Result handClickReset={toggleStart} />} */}
       </>
     )
 }
