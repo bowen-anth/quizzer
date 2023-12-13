@@ -1,6 +1,12 @@
-
-
-
+.answer-choices-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .answer-choice {
+    margin-right: 10px;
+  }
+  
 .intro-div {
     display: flex;
     flex-direction: column;
