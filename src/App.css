@@ -84,13 +84,11 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 1rem;
 }
 
 .question-div {
     width: 50%;
     margin: auto;
-    position: relative;
 }
 
 .answer-choice-div {
