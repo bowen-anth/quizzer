@@ -40,7 +40,6 @@ function App() {
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
         {startGame && !resultScreen && <Quiz quizData={quizData} />}
-        {/* {startGame && resultScreen && <Result handClickReset={toggleStart} />} */}
       </>
     )
 }

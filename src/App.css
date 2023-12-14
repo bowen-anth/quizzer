@@ -113,17 +113,36 @@
     margin: 1rem 0.5rem;
 }
 
-.answer-choice-button {
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
 .answer-choice-div.selected {
     background-color: #D6DBF5;
+}
+
+.answer-choices-div.selected {
+    background-color: #D6DBF5;
+}
+
+.answer-choice-div.correct {
+    background-color: #8ACB88;
+}
+
+.answer-choice-div.incorrect {
+    background-color: #FF6F61;
 }
 
 hr {
     border: 1px solid #DBDEF0;
     width: 70%;
-    margin: 1rem 4rem;
+    margin: 1rem 5.25rem;
+}
+
+.user-score {
+    color: #293264;
+    text-align: center;
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    margin-left: 6rem;
+    padding: 0;
+    display: inline-block;
 }

@@ -1,11 +1,13 @@
-import React from "react";
+import React from "react"
 import { shuffleArray } from "./ShuffleArray"
-import { decode } from "html-entities";
+import { decode } from "html-entities"
 
 export default function Quiz(props) {
     const [userAnswers, setUserAnswers] = React.useState([])
     const [shuffledAnswers, setShuffledAnswers] = React.useState([])
     const [selectedChoices, setSelectedChoices] = React.useState([])
+    const [selectedChoiceIndex, setSelectedChoiceIndex] = React.useState([])
+    const [userScore, setUserScore] = React.useState(null)
 
     React.useEffect(() => {
         const newShuffledAnswers = props.quizData.map((question) => {
@@ -29,12 +31,19 @@ export default function Quiz(props) {
             console.log('new answers', newAnswers)
             return newAnswers
           })
+            // Apply 'selected' class to the clicked choice
+    const answerContainers = document.querySelectorAll('.answer-choices-row');
+    const selectedChoiceContainer = answerContainers[questionIndex].querySelectorAll('.answer-choice-div')[choiceIndex]
+    selectedChoiceContainer.classList.add('selected')
 
-          setSelectedChoices((prevChoices) => {
-            const newChoices = [...prevChoices]
-            newChoices[questionIndex] = choiceIndex
-            return newChoices
-          })
+    // Remove 'selected' class from other choices in the same question
+    const otherChoices = answerContainers[questionIndex].querySelectorAll('.answer-choice-div')
+    otherChoices.forEach((choice, index) => {
+      if (index !== choiceIndex) {
+        choice.classList.remove('selected')
+      }
+    });
+          setSelectedChoiceIndex(choiceIndex)
         }
 
   const handleSubmit = () => {
@@ -42,13 +51,48 @@ export default function Quiz(props) {
     const decodedCorrectAnswers = correctAnswers.map((answer) => decode(answer))
     console.log("User Answers", userAnswers)
     console.log("decodedCorrectAnswers", decodedCorrectAnswers)
+
+    const answerContainers = document.querySelectorAll('.answer-choices-row')
+    
+    userAnswers.forEach((userAnswer, questionIndex) => {
+      const choices = answerContainers[questionIndex].querySelectorAll('.answer-choice-div')
+
+      choices.forEach((choice, choiceIndex) => {
+        const choices = answerContainers[questionIndex].querySelectorAll('.answer-choice-div')
+
+        choices.forEach((choice, choiceIndex) => {
+          choice.classList.remove('selected')
+      
+        if (choiceIndex === selectedChoiceIndex) {
+          if (decodedCorrectAnswers[questionIndex] === userAnswer) {
+            choice.classList.add('correct')
+          } else {
+            choice.classList.add('incorrect')
+          }
+        }
+      })
+    })
+  })
+
+      setSelectedChoiceIndex([])
+  
+
     const userScore = userAnswers.reduce(
       (score, userAnswer, index) =>
         userAnswer === decodedCorrectAnswers[index] ? score + 1 : score, 
         0
     )
     console.log("user score", userScore)
-    // setResultScreen(true)
+    setUserScore(userScore)
+  }
+
+  const handlePlayAgain = () => {
+    setUserAnswers([])
+    setShuffledAnswers([])
+    setSelectedChoices([])
+    setSelectedChoiceIndex([])
+    setUserScore(null)
+    handleClickStart()
   }
 
   return (
@@ -79,9 +123,16 @@ export default function Quiz(props) {
           
         ))}
 
-      <button className="submit-button" onClick={handleSubmit}>
-        Check Answers
+      {userScore !== null && (
+        <span className="user-score">
+          Your scored {userScore} / {props.quizData.length} correct answers
+        </span>
+      )}
+
+      <button className="submit-button" onClick={userScore !== null ? handlePlayAgain : handleSubmit}>
+        {userScore !== null ? "Play Again" : "Check Answers"}
       </button>
+
       <svg className="intro-svg-bottom" xmlns="http://www.w3.org/2000/svg" width="148" height="118" viewBox="0 0 148 118" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M-5.55191 4.90596C35.9614 1.77498 82.2425 -9.72149 112.306 19.1094C145.581 51.0203 155.282 102.703 142.701 147.081C130.767 189.18 93.7448 220.092 51.8208 232.476C16.5281 242.902 -15.4332 218.605 -49.1007 203.738C-85.3375 187.737 -133.641 182.993 -145.741 145.239C-158.358 105.868 -132.269 64.5881 -103.064 35.3528C-77.7328 9.99541 -41.2727 7.60006 -5.55191 4.90596Z" fill="#DEEBF8"/>
       </svg>
