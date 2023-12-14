@@ -17,23 +17,23 @@ function App() {
   }
 
   React.useEffect(() => {
-    console.log("Updated startGame state:", startGame);
-  }, [startGame]);
+    console.log("Updated startGame state:", startGame)
+  }, [startGame])
 
   React.useEffect(() => {
     if (startGame) {
       fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
         .then((res) => res.json())
         .then((data) => {
-          setQuizData(data.results);
+          setQuizData(data.results)
           console.log(data.results)
  
         })
         .catch((error) => {
-          console.error("There was an error:", error);
-        });
+          console.error("There was an error:", error)
+        })
     }
-  }, [startGame]);
+  }, [startGame])
 
 
     return (
