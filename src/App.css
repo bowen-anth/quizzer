@@ -84,12 +84,12 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin-top: 1rem;
 }
 
 .question-div {
     width: 50%;
     margin: auto;
-    margin-top: 4rem;
 }
 
 .answer-choice-div {
