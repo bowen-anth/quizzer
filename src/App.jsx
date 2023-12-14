@@ -23,7 +23,6 @@ function App() {
         .then((data) => {
           setQuizData(data.results)
           console.log(data.results)
- 
         })
         .catch((error) => {
           console.error("There was an error:", error)
