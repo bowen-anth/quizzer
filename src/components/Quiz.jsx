@@ -13,8 +13,13 @@ export default function Quiz(props) {
     React.useEffect(() => {
         const newShuffledAnswers = props.quizData.map((question) => {
           const incorrectAnswers = question.incorrect_answers
-          const decodedIncorrectAnswers = decode(incorrectAnswers)
-          const correctAnswer = decode(question.correct_answer)
+          const decodedIncorrectAnswers = Array.isArray(incorrectAnswers)
+            ? incorrectAnswers.map((answer) => (typeof answer === "string" ? decode(answer) : answer))
+            : []
+    
+          const correctAnswer = typeof question.correct_answer === "string"
+            ? decode(question.correct_answer)
+            : ""
           console.log(correctAnswer)
           
           const combinedAnswers = [...decodedIncorrectAnswers, correctAnswer]
