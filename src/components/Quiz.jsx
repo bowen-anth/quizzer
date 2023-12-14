@@ -2,7 +2,7 @@ import React from "react";
 import { shuffleArray } from "./ShuffleArray"
 import { decode } from "html-entities";
 
-export default function Questions(props) {
+export default function Quiz(props) {
     const [userAnswers, setUserAnswers] = React.useState([])
     const [shuffledAnswers, setShuffledAnswers] = React.useState([])
 
@@ -45,12 +45,10 @@ export default function Questions(props) {
   }
 
   return (
-    //maybe remove extra div and make fragment ????????
     <div className="question-div">
-      <div>
         {props.quizData.map((question, questionIndex) => (
           <div className="question-answer-container" key={questionIndex}>
-            <p>{decode(question.question)}</p>
+            <p className="question">{decode(question.question)}</p>
             {shuffledAnswers[questionIndex] && (
             <div className="answer-choices-row">
               {shuffledAnswers[questionIndex].map((choice, choiceIndex) => (
@@ -64,7 +62,6 @@ export default function Questions(props) {
             )}
           </div>
         ))}
-      </div>
 
       <button className="question-button" onClick={handleSubmit}>
         Submit
