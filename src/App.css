@@ -84,17 +84,19 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin: 1rem 0;
 }
 
 .question-div {
     width: 50%;
+    height: 100vh;
     margin: auto;
 }
 
 .answer-choice-div {
     display: flex;
     justify-content: center;
-    width: 16rem;
+    width: 50%;
     height: 3rem;
     /* flex-shrink: 0; */
     color: #293264;
@@ -131,7 +133,7 @@ body {
 hr {
     border: 1px solid #DBDEF0;
     width: 70%;
-    margin: 1rem 5.25rem;
+    margin: 2rem auto;
 }
 
 .user-score {
