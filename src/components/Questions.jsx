@@ -3,34 +3,57 @@ import { shuffleArray } from "./ShuffleArray"
 import { decode } from "html-entities";
 
 export default function Questions(props) {
-  const handleAnswerSelection = (questionIndex, choiceIndex) => {
+    const [userAnswers, setUserAnswers] = React.useState([])
+    const [shuffledAnswers, setShuffledAnswers] = React.useState([])
 
-    console.log(`Selected answer for question ${questionIndex + 1}: ${choiceIndex}`)
-  };
+    React.useEffect(() => {
+        const newShuffledAnswers = props.quizData.map((question) => {
+          const incorrectAnswers = question.incorrect_answers
+          const decodedIncorrectAnswers = decode(incorrectAnswers)
+          const correctAnswer = decode(question.correct_answer)
+          console.log(correctAnswer)
+          
+          const combinedAnswers = [...decodedIncorrectAnswers, correctAnswer]
+          return shuffleArray(combinedAnswers)
+        })
+      
+        setShuffledAnswers(newShuffledAnswers)
+      }, [props.quizData])
+
+        const handleAnswerSelection = (questionIndex, choiceIndex) => {
+          setUserAnswers((prevAnswers) => {
+            const newAnswers = [...prevAnswers]
+            const selectedChoice = shuffledAnswers[questionIndex][choiceIndex]
+            newAnswers[questionIndex] = selectedChoice
+            console.log('new answers', newAnswers)
+            return newAnswers
+          })
+        }
 
   const handleSubmit = () => {
-
-    console.log("User answers:", answerChoices)
-  };
-
-  const answerChoices = props.quizData.map((question) => {
-    const incorrectAnswers = question.incorrect_answers
-    const correctAnswer = question.correct_answer
-    const combinedAnswers = [...incorrectAnswers, correctAnswer]
-    const shuffledAnswers = shuffleArray(combinedAnswers)
-    return shuffledAnswers.map((answer) => decode(answer))
-  });
-
-  console.log("answer choices", answerChoices)
+    const correctAnswers = props.quizData.map((question) => question.correct_answer)
+    const decodedCorrectAnswers = correctAnswers.map((answer) => decode(answer))
+    console.log("User Answers", userAnswers)
+    console.log("decodedCorrectAnswers", decodedCorrectAnswers)
+    const userScore = userAnswers.reduce(
+      (score, userAnswer, index) =>
+        userAnswer === decodedCorrectAnswers[index] ? score + 1 : score, 
+        0
+    )
+    console.log("user score", userScore)
+    // setResultScreen(true)
+  }
 
   return (
+    //maybe remove extra div and make fragment ????????
     <div className="question-div">
       <div>
         {props.quizData.map((question, questionIndex) => (
           <div className="question-answer-container" key={questionIndex}>
             <p>{decode(question.question)}</p>
+            {shuffledAnswers[questionIndex] && (
             <div className="answer-choices-row">
-              {answerChoices[questionIndex].map((choice, choiceIndex) => (
+              {shuffledAnswers[questionIndex].map((choice, choiceIndex) => (
                 <div className="answer-choice" key={choiceIndex}>
                   <button onClick={() => handleAnswerSelection(questionIndex, choiceIndex)}>
                     {choice}
@@ -38,6 +61,7 @@ export default function Questions(props) {
                 </div>
               ))}
             </div>
+            )}
           </div>
         ))}
       </div>

@@ -6,18 +6,33 @@ import Result from "../src/components/Result"
 import { decode } from 'html-entities'
 
 function App() {
+  const [userAnswers, setUserAnswers] = React.useState([])
   const [quizData, setQuizData] = React.useState([])
   const [startGame, setStartGame] = React.useState(false)
   const [resultScreen, setResultScreen] = React.useState(false)
+
+  const handleAnswerSelection = (questionIndex, choiceIndex) => {
+    setUserAnswers((prevAnswers) => {
+      const newAnswers = [...prevAnswers]
+      newAnswers[questionIndex] = choiceIndex
+      return newAnswers
+    })
+  }
+
+    const handleSubmit = () => {
+      const decodedCorrectAnswers = quizData.map((question) => decode(question.correct_answer))
+      const userScore = userAnswers.reduce(
+        (score, userAnswer, index) =>
+          userAnswer === decodedCorrectAnswers[index] ? score + 1 : score, 0
+      )
+      console.log("user score", userScore)
+      // setResultScreen(true);
+    }
 
   function toggleStart() {
     setStartGame((prevState) => !prevState);
     setResultScreen(false)
     setQuizData([])
-  }
-
-  function toggleSubmit() {
-    setResultScreen((prevState) => !prevState);
   }
 
   React.useEffect(() => {
@@ -43,7 +58,7 @@ function App() {
     return (
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
-        {startGame && !resultScreen && <Questions quizData={quizData} handleClickSubmit={toggleSubmit} />}
+        {startGame && !resultScreen && <Questions quizData={quizData} handleSubmit={handleSubmit} />}
         {/* {startGame && resultScreen && <Result handClickReset={toggleStart} />} */}
       </>
     )
