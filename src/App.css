@@ -65,8 +65,8 @@ body {
 .intro-svg-top {
     margin-left: auto;
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
 }
 
 .intro-svg-bottom {
@@ -90,6 +90,7 @@ body {
 .question-div {
     width: 50%;
     margin: auto;
+    position: relative;
 }
 
 .answer-choice-div {
