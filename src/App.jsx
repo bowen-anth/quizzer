@@ -17,10 +17,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    console.log("Updated startGame state:", startGame)
-  }, [startGame])
-
-  React.useEffect(() => {
     if (startGame) {
       fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
         .then((res) => res.json())
@@ -39,7 +35,7 @@ function App() {
     return (
       <>
         {!startGame && <Intro handleClickStart={toggleStart} />}
-        {startGame && !resultScreen && <Quiz quizData={quizData} />}
+        {startGame && !resultScreen && <Quiz quizData={quizData} handleClickStart={toggleStart} />}
       </>
     )
 }

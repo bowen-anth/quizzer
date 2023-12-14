@@ -8,6 +8,7 @@ export default function Quiz(props) {
     const [selectedChoices, setSelectedChoices] = React.useState([])
     const [selectedChoiceIndex, setSelectedChoiceIndex] = React.useState([])
     const [userScore, setUserScore] = React.useState(null)
+  
 
     React.useEffect(() => {
         const newShuffledAnswers = props.quizData.map((question) => {
@@ -92,7 +93,7 @@ export default function Quiz(props) {
     setSelectedChoices([])
     setSelectedChoiceIndex([])
     setUserScore(null)
-    handleClickStart()
+    props.handleClickStart()
   }
 
   return (
