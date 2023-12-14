@@ -51,7 +51,7 @@ export default function Quiz(props) {
             </svg>
         {props.quizData.map((question, questionIndex) => (
           <div className="question-answer-container" key={questionIndex}>
-            <p className="question">{decode(question.question)}</p>
+            <p className="question-paragraph">{decode(question.question)}</p>
             {shuffledAnswers[questionIndex] && (
             <div className="answer-choices-row">
               {shuffledAnswers[questionIndex].map((choice, choiceIndex) => (
@@ -68,7 +68,7 @@ export default function Quiz(props) {
           
         ))}
 
-      <button className="question-button" onClick={handleSubmit}>
+      <button className="submit-button" onClick={handleSubmit}>
         Check Answers
       </button>
       <svg className="intro-svg-bottom" xmlns="http://www.w3.org/2000/svg" width="148" height="118" viewBox="0 0 148 118" fill="none">

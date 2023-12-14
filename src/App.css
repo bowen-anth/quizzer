@@ -31,7 +31,7 @@
     margin: 1rem;
 }
 
-.intro-button, .question-button {
+.intro-button, .submit-button {
     border-radius: 0.9375rem;
     background: #4D5B9E;
     color: #F5F7FB;
@@ -47,32 +47,37 @@
     padding: 0.5rem;
 }
 
-.question-button {
+.submit-button {
     width: 12rem;
     color: #F5F7FB;
     text-align: center;
     font-family: Inter;
-    font-size: 0.64rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    width: 12rem;
+    height: 3rem;
+    margin-left: 28rem;
+    margin-top: 1rem;
 }
 
 .intro-svg-top {
     margin-left: auto;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 0px;
+    top: 0px;
 }
 
 .intro-svg-bottom {
     margin-right: auto;
     position: absolute;
-    left: 0;
-    bottom: 0;
+    left: 0px;
+    bottom: 0px;
+    transform: translate(0%)
 }
 
-.question {
+.question-paragraph {
     color: #293264;
     font-family: Karla;
     font-size: 2rem;
@@ -82,7 +87,9 @@
 }
 
 .question-div {
-    margin: 4rem;
+    width: 50%;
+    margin: auto;
+    margin-top: 4rem;
 }
 
 .answer-choice-div {
@@ -113,5 +120,5 @@
 hr {
     border: 1px solid #DBDEF0;
     width: 70%;
-    margin: 1rem 0;
+    margin: 1rem 4rem;
 }
