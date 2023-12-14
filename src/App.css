@@ -74,7 +74,7 @@
     position: absolute;
     left: 0px;
     bottom: 0px;
-    transform: translate(0%)
+    transform: translate(0%, 65%);
 }
 
 .question-paragraph {
@@ -115,6 +115,11 @@
 
 .answer-choice-button {
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.answer-choice-div.selected {
+    background-color: #D6DBF5;
 }
 
 hr {

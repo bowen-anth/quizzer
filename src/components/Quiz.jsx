@@ -5,6 +5,7 @@ import { decode } from "html-entities";
 export default function Quiz(props) {
     const [userAnswers, setUserAnswers] = React.useState([])
     const [shuffledAnswers, setShuffledAnswers] = React.useState([])
+    const [selectedChoices, setSelectedChoices] = React.useState([])
 
     React.useEffect(() => {
         const newShuffledAnswers = props.quizData.map((question) => {
@@ -27,6 +28,12 @@ export default function Quiz(props) {
             newAnswers[questionIndex] = selectedChoice
             console.log('new answers', newAnswers)
             return newAnswers
+          })
+
+          setSelectedChoices((prevChoices) => {
+            const newChoices = [...prevChoices]
+            newChoices[questionIndex] = choiceIndex
+            return newChoices
           })
         }
 
@@ -55,8 +62,12 @@ export default function Quiz(props) {
             {shuffledAnswers[questionIndex] && (
             <div className="answer-choices-row">
               {shuffledAnswers[questionIndex].map((choice, choiceIndex) => (
-                <div className="answer-choice-div" key={choiceIndex}>
-                  <button className="answer-choice-button" onClick={() => handleAnswerSelection(questionIndex, choiceIndex)}>
+                <div 
+                  className={`answer-choice-div ${selectedChoices[questionIndex] === choiceIndex ? "selected" : ""}`}
+                  key={choiceIndex}
+                  onClick={() => handleAnswerSelection(questionIndex, choiceIndex)}
+                >
+                  <button className={`answer-choice-button ${selectedChoices[questionIndex] === choiceIndex ? "selected" : ""}`}>
                     {choice}
                   </button>
                 </div>
