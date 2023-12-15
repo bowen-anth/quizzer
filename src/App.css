@@ -18,8 +18,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin-top: -1.5rem;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .intro-header{
@@ -70,7 +75,22 @@ body {
 }
 
 .intro-svg-bottom {
-    margin-right: auto;
+    /* margin-right: auto; */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    /* transform: translate(0%, 0%); */
+}
+
+.quiz-svg-top {
+    margin-left: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.quiz-svg-bottom {
+    /* margin-right: auto; */
     position: relative;
     left: 0;
     bottom: 0;
@@ -97,7 +117,7 @@ body {
 .answer-choice-div {
     display: flex;
     justify-content: center;
-    width: 50%;
+    /* width: 50%; */
     height: 3rem;
     /* flex-shrink: 0; */
     color: #293264;
