@@ -89,7 +89,7 @@ body {
 
 .question-div {
     padding: 0;
-    width: 50%;
+    width: min(90%, 50%);
     height: 100%;
     margin: auto;
 }
