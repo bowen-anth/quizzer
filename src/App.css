@@ -71,7 +71,7 @@ body {
 
 .intro-svg-bottom {
     margin-right: auto;
-    position: absolute;
+    position: relative;
     left: 0;
     bottom: 0;
     /* transform: translate(0%, 0%); */
